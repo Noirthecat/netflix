@@ -11,29 +11,33 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/videos")
 public class VideoController {
 
     private VideoDao videoDao;
 
     private RecommendationServiceCaller recommendationServiceCaller;
 
-    @GetMapping("/")
+    @GetMapping("/videos")
     public List<Video> getAllVideos() {
         return videoDao.getAll();
     }
 
-    @GetMapping("/{id}")
-    public VideoWithRecommendations getVideoWithRecommendation(@PathVariable Long id) {
+    @GetMapping("/videos/{id}")
+    public VideoWithRecommendations getVideoWithRecommendations(@PathVariable Long id) {
         return new VideoWithRecommendations(
                 videoDao.getVideo(id),
                 recommendationServiceCaller.getRecommendations(id)
         );
     }
 
-    @PostMapping("/{id}/recommendations")
+    @PostMapping("/videos/{id}/recommendations")
     public void addRecommendation(@PathVariable Long id, @RequestBody String recommendation) {
         recommendationServiceCaller.addRecommendation(id, recommendation);
+    }
+
+    @PutMapping("/recommendations/{recommendationId}")
+    public void updateRecommendation(@PathVariable Long recommendationId, @RequestBody String comment) {
+        recommendationServiceCaller.updateRecommendation(recommendationId, comment);
     }
 
 }
