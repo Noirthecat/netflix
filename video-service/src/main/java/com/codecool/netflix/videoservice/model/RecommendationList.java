@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VideoWithRecommendations {
-    private Video video;
+public class RecommendationList {
     private List<Recommendation> recommendations;
 }

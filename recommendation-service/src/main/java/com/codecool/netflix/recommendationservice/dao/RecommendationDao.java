@@ -1,12 +1,10 @@
 package com.codecool.netflix.recommendationservice.dao;
 
-import com.codecool.netflix.recommendationservice.model.Recommendation;
-
-import java.util.List;
+import com.codecool.netflix.recommendationservice.model.RecommendationList;
 
 public interface RecommendationDao {
 
-    List<Recommendation> getRecommendations(Long videoId);
+    RecommendationList getRecommendations(Long videoId);
 
     void addNewRecommendation(Long videoId, String comment);
 

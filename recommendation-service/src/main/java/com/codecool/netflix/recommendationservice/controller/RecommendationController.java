@@ -1,11 +1,9 @@
 package com.codecool.netflix.recommendationservice.controller;
 
 import com.codecool.netflix.recommendationservice.dao.RecommendationDao;
-import com.codecool.netflix.recommendationservice.model.Recommendation;
+import com.codecool.netflix.recommendationservice.model.RecommendationList;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -14,7 +12,8 @@ public class RecommendationController {
     private RecommendationDao recommendationDao;
 
     @GetMapping("/videos/{videoId}/recommendations")
-    public List<Recommendation> getRecommendations(@PathVariable Long videoId) {
+    public RecommendationList getRecommendations(@PathVariable Long videoId) {
+        System.out.println("get recommendations of video " + videoId);
         return recommendationDao.getRecommendations(videoId);
     }
 

@@ -1,6 +1,7 @@
 package com.codecool.netflix.recommendationservice.dao;
 
 import com.codecool.netflix.recommendationservice.model.Recommendation;
+import com.codecool.netflix.recommendationservice.model.RecommendationList;
 import com.codecool.netflix.recommendationservice.repository.RecommendationRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +17,8 @@ public class RecommendationDaoDB implements RecommendationDao {
     private RecommendationRepository recommendationRepository;
 
     @Override
-    public List<Recommendation> getRecommendations(Long videoId) {
-        return recommendationRepository.findAllByVideoId(videoId);
+    public RecommendationList getRecommendations(Long videoId) {
+         return new RecommendationList(recommendationRepository.findAllByVideoId(videoId));
     }
 
     @Override

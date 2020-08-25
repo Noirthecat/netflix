@@ -1,4 +1,4 @@
-package com.codecool.netflix.videoservice.model;
+package com.codecool.netflix.recommendationservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,10 +6,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VideoWithRecommendations {
-    private Video video;
+@Data
+public class RecommendationList {
     private List<Recommendation> recommendations;
 }
