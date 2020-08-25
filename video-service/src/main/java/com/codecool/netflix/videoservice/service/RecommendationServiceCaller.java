@@ -37,7 +37,7 @@ public class RecommendationServiceCaller {
 
         HttpEntity<String> request = new HttpEntity<>(comment);
         String url = baseUrl + "/videos/" + videoId + "/recommendations";
-        restTemplate.postForObject(url, request, String.class);
+        restTemplate.postForObject(url, request, Recommendation.class);
     }
 
     public void updateRecommendation(Long recommendationId, String comment) {
