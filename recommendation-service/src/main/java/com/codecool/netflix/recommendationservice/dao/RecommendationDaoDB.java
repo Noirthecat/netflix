@@ -22,12 +22,8 @@ public class RecommendationDaoDB implements RecommendationDao {
     }
 
     @Override
-    public void addNewRecommendation(Long videoId, String comment) {
-        Recommendation recommendation = Recommendation.builder()
-                .comment(comment)
-                .videoId(videoId)
-                .build();
-        recommendationRepository.save(recommendation);
+    public void addNewRecommendation(Recommendation recommendation) {
+        recommendationRepository.saveAndFlush(recommendation);
     }
 
     @Override

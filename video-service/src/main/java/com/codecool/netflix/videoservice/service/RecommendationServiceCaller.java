@@ -32,12 +32,12 @@ public class RecommendationServiceCaller {
         return body != null ? body.getRecommendations() : null;
     }
 
-    public void addRecommendation(Long videoId, String comment) {
-        log.info("add recommendation for video (id: " + videoId + "): " + comment);
+    public Recommendation addRecommendation(Recommendation recommendation) {
+        log.info("add recommendation: " + recommendation.toString());
 
-        HttpEntity<String> request = new HttpEntity<>(comment);
-        String url = baseUrl + "/videos/" + videoId + "/recommendations";
-        restTemplate.postForObject(url, request, Recommendation.class);
+        HttpEntity<Recommendation> request = new HttpEntity<>(recommendation);
+        String url = baseUrl + "/videos/" + recommendation.getVideoId() + "/recommendations";
+        return restTemplate.postForObject(url, request, Recommendation.class);
     }
 
     public void updateRecommendation(Long recommendationId, String comment) {

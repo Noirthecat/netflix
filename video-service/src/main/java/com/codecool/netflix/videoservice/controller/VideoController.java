@@ -1,6 +1,7 @@
 package com.codecool.netflix.videoservice.controller;
 
 import com.codecool.netflix.videoservice.dao.VideoDao;
+import com.codecool.netflix.videoservice.model.Recommendation;
 import com.codecool.netflix.videoservice.model.Video;
 import com.codecool.netflix.videoservice.model.VideoWithRecommendations;
 import com.codecool.netflix.videoservice.service.RecommendationServiceCaller;
@@ -31,9 +32,11 @@ public class VideoController {
         );
     }
 
-    @PostMapping("/videos/{id}/recommendations")
-    public void addRecommendation(@PathVariable Long id, @RequestBody String recommendation) {
-        recommendationServiceCaller.addRecommendation(id, recommendation);
+    @PostMapping("/videos/{videoId}/recommendations")
+    public Recommendation addRecommendation(@PathVariable Long videoId,
+                                            @RequestBody Recommendation recommendation) {
+        recommendation.setId(videoId);
+        return recommendationServiceCaller.addRecommendation(recommendation);
     }
 
     @PutMapping("/recommendations/{recommendationId}")
