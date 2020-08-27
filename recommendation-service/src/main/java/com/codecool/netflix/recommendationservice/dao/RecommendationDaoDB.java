@@ -7,8 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -18,12 +16,14 @@ public class RecommendationDaoDB implements RecommendationDao {
 
     @Override
     public RecommendationList getRecommendations(Long videoId) {
+        log.info("get recommendations for videoId " + videoId);
          return new RecommendationList(recommendationRepository.findAllByVideoId(videoId));
     }
 
     @Override
     public void addNewRecommendation(Recommendation recommendation) {
         recommendationRepository.saveAndFlush(recommendation);
+        log.info("added new recommendation " + recommendation);
     }
 
     @Override
@@ -32,6 +32,7 @@ public class RecommendationDaoDB implements RecommendationDao {
         if (recommendation != null) {
             recommendation.setComment(comment);
             recommendationRepository.save(recommendation);
+            log.info("recommendation updated, id: " + recommendationId);
         } else {
             log.info("Recommendation with id " + recommendationId + " not found!");
         }

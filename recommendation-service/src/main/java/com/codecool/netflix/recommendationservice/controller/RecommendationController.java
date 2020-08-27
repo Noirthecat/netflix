@@ -15,7 +15,6 @@ public class RecommendationController {
 
     @GetMapping("/videos/{videoId}/recommendations")
     public RecommendationList getRecommendations(@PathVariable Long videoId) {
-        System.out.println("get recommendations of video " + videoId);
         return recommendationDao.getRecommendations(videoId);
     }
 

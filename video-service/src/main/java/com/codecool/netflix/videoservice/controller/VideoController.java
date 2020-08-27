@@ -24,18 +24,18 @@ public class VideoController {
         return videoDao.getAll();
     }
 
-    @GetMapping("/videos/{id}")
-    public VideoWithRecommendations getVideoWithRecommendations(@PathVariable Long id) {
+    @GetMapping("/videos/{videoId}")
+    public VideoWithRecommendations getVideoWithRecommendations(@PathVariable Long videoId) {
         return new VideoWithRecommendations(
-                videoDao.getVideo(id),
-                recommendationServiceCaller.getRecommendations(id)
+                videoDao.getVideo(videoId),
+                recommendationServiceCaller.getRecommendations(videoId)
         );
     }
 
     @PostMapping("/videos/{videoId}/recommendations")
     public Recommendation addRecommendation(@PathVariable Long videoId,
                                             @RequestBody Recommendation recommendation) {
-        recommendation.setId(videoId);
+        recommendation.setVideoId(videoId);
         return recommendationServiceCaller.addRecommendation(recommendation);
     }
 

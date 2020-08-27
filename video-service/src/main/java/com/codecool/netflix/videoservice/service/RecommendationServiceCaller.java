@@ -25,7 +25,7 @@ public class RecommendationServiceCaller {
     private String baseUrl;
 
     public List<Recommendation> getRecommendations(Long videoId) {
-        log.info("get recommendations for video (id: " + videoId + ")");
+        log.info("recommendation service caller: get recommendations for video (id: " + videoId + ")");
 
         String url = baseUrl + "/videos/" + videoId + "/recommendations";
         RecommendationList body = restTemplate.getForEntity(url, RecommendationList.class).getBody();
@@ -33,7 +33,7 @@ public class RecommendationServiceCaller {
     }
 
     public Recommendation addRecommendation(Recommendation recommendation) {
-        log.info("add recommendation: " + recommendation.toString());
+        log.info("recommendation service caller: add recommendation: " + recommendation);
 
         HttpEntity<Recommendation> request = new HttpEntity<>(recommendation);
         String url = baseUrl + "/videos/" + recommendation.getVideoId() + "/recommendations";
@@ -41,7 +41,7 @@ public class RecommendationServiceCaller {
     }
 
     public void updateRecommendation(Long recommendationId, String comment) {
-        log.info("update recommendation (id: " + recommendationId + "): " + comment);
+        log.info("recommendation service caller: update recommendation (id: " + recommendationId + "): " + comment);
 
         String url = baseUrl + "/recommendations/" + recommendationId;
         HttpEntity<String> requestUpdate = new HttpEntity<>(comment);
