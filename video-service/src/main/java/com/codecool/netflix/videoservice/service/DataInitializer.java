@@ -19,17 +19,17 @@ public class DataInitializer {
     public void init() {
         videoDao.store(Video.builder()
                 .name("Codecool - Microservices with Spring Cloud #3")
-                .url("https://www.youtube.com/watch?v=_Op_sKBWBlk&list=PL0JbT22qQL-OzeaukJH-QEUnd7JHteC7I&index=3")
+                .url("https://www.youtube.com/watch?v=_Op_sKBWBlk")
                 .build());
 
         videoDao.store(Video.builder()
                 .name("“180” Movie")
-                .url("https://www.youtube.com/watch?v=7y2KsU_dhwI&t=1712s")
+                .url("https://www.youtube.com/watch?v=7y2KsU_dhwI")
                 .build());
 
         videoDao.store(Video.builder()
                 .name("The Fool - Full Movie")
-                .url("https://www.youtube.com/watch?v=hlCc_TA7gw8&list=PLF7A795CE0A9857FE&index=10")
+                .url("https://www.youtube.com/watch?v=hlCc_TA7gw8")
                 .build());
     }
 
