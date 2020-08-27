@@ -17,7 +17,7 @@ public class RecommendationDaoDB implements RecommendationDao {
     @Override
     public RecommendationList getRecommendations(Long videoId) {
         log.info("get recommendations for videoId " + videoId);
-         return new RecommendationList(recommendationRepository.findAllByVideoId(videoId));
+        return new RecommendationList(recommendationRepository.findAllByVideoId(videoId));
     }
 
     @Override
@@ -27,12 +27,15 @@ public class RecommendationDaoDB implements RecommendationDao {
     }
 
     @Override
-    public void updateRecommendation(Long recommendationId, String comment) {
-        Recommendation recommendation = recommendationRepository.findById(recommendationId).orElse(null);
-        if (recommendation != null) {
-            recommendation.setComment(comment);
-            recommendationRepository.save(recommendation);
-            log.info("recommendation updated, id: " + recommendationId);
+    public void updateRecommendation(Long recommendationId, Recommendation editedRecommendation) {
+        Recommendation recommendationToBeUpdated = recommendationRepository.findById(recommendationId).orElse(null);
+        if (recommendationToBeUpdated != null) {
+            recommendationToBeUpdated.setComment(editedRecommendation.getComment());
+            recommendationToBeUpdated.setRating(editedRecommendation.getRating());
+
+            recommendationRepository.save(recommendationToBeUpdated);
+
+            log.info("recommendation updated: " + editedRecommendation);
         } else {
             log.info("Recommendation with id " + recommendationId + " not found!");
         }

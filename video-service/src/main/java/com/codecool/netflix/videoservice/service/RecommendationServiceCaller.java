@@ -40,12 +40,13 @@ public class RecommendationServiceCaller {
         return restTemplate.postForObject(url, request, Recommendation.class);
     }
 
-    public void updateRecommendation(Long recommendationId, String comment) {
-        log.info("recommendation service caller: update recommendation (id: " + recommendationId + "): " + comment);
+    public void updateRecommendation(Long recommendationId, Recommendation editedRecommendation) {
+        log.info("recommendation service caller: update recommendation (id: " + recommendationId + "): "
+                + editedRecommendation);
 
         String url = baseUrl + "/recommendations/" + recommendationId;
-        HttpEntity<String> requestUpdate = new HttpEntity<>(comment);
-        restTemplate.exchange(url, HttpMethod.PUT, requestUpdate, Void.class);
+        HttpEntity<Recommendation> requestUpdate = new HttpEntity<>(editedRecommendation);
+        restTemplate.exchange(url, HttpMethod.PUT, requestUpdate, Recommendation.class);
     }
 
 }

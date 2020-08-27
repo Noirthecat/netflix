@@ -13,18 +13,19 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/videos")
 public class VideoController {
 
     private VideoDao videoDao;
 
     private RecommendationServiceCaller recommendationServiceCaller;
 
-    @GetMapping("/videos")
+    @GetMapping("")
     public List<Video> getAllVideos() {
         return videoDao.getAll();
     }
 
-    @GetMapping("/videos/{videoId}")
+    @GetMapping("/{videoId}")
     public VideoWithRecommendations getVideoWithRecommendations(@PathVariable Long videoId) {
         return new VideoWithRecommendations(
                 videoDao.getVideo(videoId),
@@ -32,16 +33,17 @@ public class VideoController {
         );
     }
 
-    @PostMapping("/videos/{videoId}/recommendations")
+    @PostMapping("/{videoId}/recommendations")
     public Recommendation addRecommendation(@PathVariable Long videoId,
                                             @RequestBody Recommendation recommendation) {
         recommendation.setVideoId(videoId);
         return recommendationServiceCaller.addRecommendation(recommendation);
     }
 
-    @PutMapping("/recommendations/{recommendationId}")
-    public void updateRecommendation(@PathVariable Long recommendationId, @RequestBody String comment) {
-        recommendationServiceCaller.updateRecommendation(recommendationId, comment);
+    @PutMapping("/{videoId}/recommendations/{recommendationId}")
+    public void updateRecommendation(@PathVariable Long recommendationId,
+                                     @RequestBody Recommendation editedRecommendation) {
+        recommendationServiceCaller.updateRecommendation(recommendationId, editedRecommendation);
     }
 
 }

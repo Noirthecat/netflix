@@ -25,8 +25,9 @@ public class RecommendationController {
     }
 
     @PutMapping("/recommendations/{recommendationId}")
-    public void updateRecommendation(@PathVariable Long recommendationId, @RequestBody String comment) {
-        recommendationDao.updateRecommendation(recommendationId, comment);
+    public void updateRecommendation(@PathVariable Long recommendationId,
+                                     @RequestBody Recommendation editedRecommendation) {
+        recommendationDao.updateRecommendation(recommendationId, editedRecommendation);
     }
 
 }

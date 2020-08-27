@@ -9,6 +9,6 @@ public interface RecommendationDao {
 
     void addNewRecommendation(Recommendation recommendation);
 
-    void updateRecommendation(Long recommendationId, String comment);
+    void updateRecommendation(Long recommendationId, Recommendation editedRecommendation);
 
 }
